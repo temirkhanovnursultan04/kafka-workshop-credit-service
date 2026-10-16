@@ -16,8 +16,6 @@ spring:
         retry.backoff.ms: 500
         enable.idempotence: true
         spring.json.add.type.headers: false
-    consumer:
-      group-id: ${spring.application.name}-consumer-group
 
 server:
   port: ${SERVER_PORT:8080}
