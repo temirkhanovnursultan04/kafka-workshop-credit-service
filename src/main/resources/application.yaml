@@ -30,7 +30,7 @@ app:
     backoff-attempts: ${KAFKA_TOPIC_BACKOFF_ATTEMPTS:5}
     dlt-suffix: ${KAFKA_TOPIC_DLT_SUFFIX:-dlt}
     credit-topic:
-      name: ${KAFKA_TOPIC_CREDIT:jdmik18.accounting.consumer}
+      name: ${KAFKA_TOPIC_CREDIT:kafka.workflow.topic}
       partitions: ${KAFKA_TOPIC_PARTITIONS:3}
       replicas: ${KAFKA_TOPIC_REPLICAS:3}
       min-in-sync-replicas: "${KAFKA_TOPIC_MIN_IN_SYNC_REPLICAS:2}"
