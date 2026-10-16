@@ -17,7 +17,7 @@ spring:
         enable.idempotence: true
         spring.json.add.type.headers: false
     consumer:
-      group-id: jdmik18-${spring.application.name}-consumer-group
+      group-id: ${spring.application.name}-consumer-group
 
 server:
   port: ${SERVER_PORT:8080}
