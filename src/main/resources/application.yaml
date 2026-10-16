@@ -1,3 +1,36 @@
 spring:
   application:
     name: kafka-workshop-credit-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:localhost:9092,localhost:9094,localhost:9096}
+    producer:
+      acks: all
+      compression-type: lz4
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      batch-size: 65536
+      properties:
+        max.in.flight.requests.per.connection: 5
+        linger.ms: 100
+        delivery.timeout.ms: 20_000
+        request.timeout.ms: 4_500
+        retry.backoff.ms: 500
+        enable.idempotence: true
+        spring.json.add.type.headers: false
+    consumer:
+      group-id: jdmik18-${spring.application.name}-consumer-group
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  notification-service:
+    url: ${NOTIFICATION_URL:http://localhost:8081}
+  kafka-topics:
+    backoff-interval: ${KAFKA_TOPIC_BACKOFF_INTERVAL:500}
+    backoff-attempts: ${KAFKA_TOPIC_BACKOFF_ATTEMPTS:5}
+    dlt-suffix: ${KAFKA_TOPIC_DLT_SUFFIX:-dlt}
+    credit-topic:
+      name: ${KAFKA_TOPIC_CREDIT:jdmik18.accounting.consumer}
+      partitions: ${KAFKA_TOPIC_PARTITIONS:3}
+      replicas: ${KAFKA_TOPIC_REPLICAS:3}
+      min-in-sync-replicas: "${KAFKA_TOPIC_MIN_IN_SYNC_REPLICAS:2}"
